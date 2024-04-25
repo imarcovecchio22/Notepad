@@ -14,6 +14,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.notepad.Nota
 import com.example.notepad.ui.theme.NotepadTheme
 
 
@@ -21,15 +22,22 @@ import com.example.notepad.ui.theme.NotepadTheme
 fun ListaPage(
     modifier: Modifier = Modifier,
     onNotaSelected : (String) -> Unit,
-    notas: List<String>
+    notas: List<Nota>
 ) {
     LazyColumn(modifier = modifier) {
         items(items = notas){
             Card(modifier = Modifier
                 .padding(10.dp)
-                .clickable { onNotaSelected(it) }
+                .clickable { onNotaSelected(it.titulo) }
             ){
-                Text(text = it)
+                Text(
+                    modifier= Modifier.padding(10.dp),
+                    text = it.titulo
+                )
+                Text(
+                    modifier= Modifier.padding(10.dp),
+                    text = it.cuerpo
+                )
             }
 
         }
@@ -41,7 +49,7 @@ fun ListaPage(
 @Preview(showBackground = true)
 @Composable
 fun ListaPagePreview() {
-    val notas = remember { mutableStateListOf<String>()}
+    val notas = remember { mutableStateListOf<Nota>()}
     NotepadTheme {
         ListaPage(onNotaSelected = {},
         notas = notas)

@@ -1,7 +1,9 @@
 package com.example.notepad.pages
 
 import androidx.compose.foundation.layout.Column
+
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -10,26 +12,40 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import com.example.notepad.Nota
 import com.example.notepad.ui.theme.NotepadTheme
 
 @Composable
 fun CrearNotaPage(
     modifier: Modifier = Modifier,
-    onNuevaNota: (String) -> Unit) {
-    var texto by remember { mutableStateOf("Ingrese nota") }
+    onNuevaNota: (
+            titulo:String,
+            cuerpo:String
+            ) -> Unit) {
+    var titulo by remember { mutableStateOf("") }
+    var cuerpo by remember { mutableStateOf("") }
 
-    Column(modifier =modifier.fillMaxSize()) {
+    Column(modifier =modifier
+        .fillMaxSize()
+        .padding(20.dp)
+    ) {
 
         TextField(
-            value = texto,
-            onValueChange = {texto=it }
+            value = titulo,
+            onValueChange = {titulo =it }
+        )
+        TextField(
+            value = cuerpo,
+            onValueChange = {cuerpo =it }
         )
 
         Button(
             onClick = {
-                onNuevaNota(texto)
+                onNuevaNota(titulo,cuerpo )
             }
         ) {
             Text(
@@ -45,6 +61,6 @@ fun CrearNotaPage(
 @Composable
 fun CrearNotaPagePreview() {
     NotepadTheme {
-        CrearNotaPage(onNuevaNota = {})
+        CrearNotaPage(onNuevaNota = {titulo, cuerpo ->  })
     }
-}
+    }
