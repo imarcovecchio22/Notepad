@@ -34,10 +34,6 @@ fun ListaPage(
                     modifier= Modifier.padding(10.dp),
                     text = it.titulo
                 )
-                Text(
-                    modifier= Modifier.padding(10.dp),
-                    text = it.cuerpo
-                )
             }
 
         }
